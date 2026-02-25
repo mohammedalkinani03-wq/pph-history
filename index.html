@@ -1,25 +1,238 @@
-<div class="card">
-  <h2>1. Bio-data & HOPI</h2>
-  <label>Full Name / Patient ID</label>
-  <input type="text" id="name" placeholder="Enter patient identity">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PPH Clinical Assessment</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .header { text-align: center; margin-bottom: 30px; }
+    .nav-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+    .nav-buttons button { padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+    .nav-buttons button:hover { background-color: #0056b3; }
+    .nav-buttons button.active { background-color: #28a745; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .card { border: 1px solid #ddd; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+    form label { display: block; margin-top: 15px; font-weight: bold; }
+    form input, form select, form textarea { width: 100%; padding: 8px; margin-top: 5px; }
+    button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    #report-container { border: 1px solid #000; padding: 15px; background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>PPH (Postpartum Hemorrhage) Clinical Assessment</h1>
+      <p>Multi-Step Patient Data Collection Form</p>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="active" onclick="switchPage(1)">Step 1: Bio-data</button>
+      <button onclick="switchPage(2)">Step 2: Intrapartum</button>
+      <button onclick="switchPage(3)">Step 3: Clinical Markers</button>
+      <button onclick="switchPage(4)">Step 4: Report</button>
+    </div>
 
-  <label>Age & Parity (GPA)</label>
-  <input type="text" id="gpa" placeholder="e.g. 32yo, G3P2A0">
+    <!-- Page 1: Bio-data & HOPI -->
+    <div id="page1" class="page active">
+      <div class="card">
+        <h2>1. Bio-data & HOPI</h2>
+        <label>Full Name / Patient ID</label>
+        <input type="text" id="name" placeholder="Enter patient identity">
 
-  <label>Is the patient a Grand Multipara (Para ≥ 5)?</label>
-  <select id="grand_multi">
-    <option value="No">No</option>
-    <option value="Yes">Yes (High Risk for Atony)</option>
-  </select>
+        <label>Age & Parity (GPA)</label>
+        <input type="text" id="gpa" placeholder="e.g. 32yo, G3P2A0">
 
-  <label>Onset: When did bleeding start?</label>
-  <select id="onset">
-    <option value="Primary">Primary (Within 24hrs)</option>
-    <option value="Secondary">Secondary (24hrs - 12wks)</option>
-  </select>
+        <label>Is the patient a Grand Multipara (Para ≥ 5)?</label>
+        <select id="grand_multi">
+          <option value="No">No</option>
+          <option value="Yes">Yes (High Risk for Atony)</option>
+        </select>
 
-  <label>Symptoms (Dizziness, Faintness, Pain?)</label>
-  <textarea id="symptoms" rows="2"></textarea>
+        <label>Onset: When did bleeding start?</label>
+        <select id="onset">
+          <option value="Primary">Primary (Within 24hrs)</option>
+          <option value="Secondary">Secondary (24hrs - 12wks)</option>
+        </select>
 
-  <button onclick="saveStep(1)">Continue to Intrapartum History</button>
-</div>
+        <label>Symptoms (Dizziness, Faintness, Pain?)</label>
+        <textarea id="symptoms" rows="2"></textarea>
+
+        <button onclick="saveStep(1)">Continue to Intrapartum History</button>
+      </div>
+    </div>
+
+    <!-- Page 2: Intrapartum & Placental History -->
+    <div id="page2" class="page">
+      <div class="card">
+        <h2>Step 2: Intrapartum & Placental History</h2>
+        <form id="pph-page-2">
+          <label>Labor Duration: <input type="text" id="labor_duration"></label><br>
+          <label>Mode of Delivery: 
+            <select id="mode">
+              <option value="SVD">SVD</option>
+              <option value="Forceps/Ventouse">Instrumental</option>
+              <option value="C-Section">C-Section</option>
+            </select>
+          </label><br>
+          <label>Placenta Complete? 
+            <input type="radio" name="placenta" value="Complete"> Yes
+            <input type="radio" name="placenta" value="Incomplete/Ragged"> No
+          </label><br>
+          <label>Uterine Overdistension (Multiple/Macrosomia): <input type="text" id="distension"></label><br>
+          <button type="button" onclick="saveAndNext(2)">Next: Medical History</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Page 3: History & Clinical Markers -->
+    <div id="page3" class="page">
+      <div class="card">
+        <h2>Step 3: History & Clinical Markers</h2>
+        <form id="pph-page-3">
+          <label>Previous PPH? <input type="checkbox" id="prev_pph"></label><br>
+          <label>Coagulopathy/Blood Thinners: <input type="text" id="thrombin_risk"></label><br>
+          <hr>
+          <h3>Vitals</h3>
+          <label>Pulse (BPM): <input type="number" id="pulse"></label><br>
+          <label>BP (mmHg): <input type="text" id="bp"></label><br>
+          <label>Uterine Tone: 
+            <select id="tone">
+              <option value="Boggy">Boggy (Atony)</option>
+              <option value="Firm">Firm (Trauma/Thrombin)</option>
+            </select>
+          </label><br>
+          <label>Additional Notes: <textarea id="notes"></textarea></label><br>
+          <button type="button" onclick="saveAndNext(3)">Generate Final Report</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Page 4: Report -->
+    <div id="page4" class="page">
+      <div class="card">
+        <h2>PPH Comprehensive Clinical Report</h2>
+        <div id="report-container"></div>
+        <button onclick="resetForm()">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Switch between pages
+    function switchPage(pageNum) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      // Show selected page
+      document.getElementById('page' + pageNum).classList.add('active');
+      
+      // Update button states
+      document.querySelectorAll('.nav-buttons button').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx === pageNum - 1);
+      });
+
+      // Generate report if on page 4
+      if (pageNum === 4) {
+        generateReport();
+      }
+    }
+
+    // Save step 1 and move to step 2
+    function saveStep(step) {
+      const data = {
+        name: document.getElementById('name').value,
+        gpa: document.getElementById('gpa').value,
+        grand_multi: document.getElementById('grand_multi').value,
+        onset: document.getElementById('onset').value,
+        symptoms: document.getElementById('symptoms').value
+      };
+      localStorage.setItem('pph_data_1', JSON.stringify(data));
+      switchPage(2);
+    }
+
+    // Save and move to next page
+    function saveAndNext(step) {
+      if (step === 2) {
+        const data = {
+          labor_duration: document.getElementById('labor_duration').value,
+          mode: document.getElementById('mode').value,
+          placenta: document.querySelector('input[name="placenta"]:checked')?.value || '',
+          distension: document.getElementById('distension').value
+        };
+        localStorage.setItem('pph_data_2', JSON.stringify(data));
+        switchPage(3);
+      } else if (step === 3) {
+        const data = {
+          prev_pph: document.getElementById('prev_pph').checked,
+          thrombin_risk: document.getElementById('thrombin_risk').value,
+          pulse: document.getElementById('pulse').value,
+          bp: document.getElementById('bp').value,
+          tone: document.getElementById('tone').value,
+          notes: document.getElementById('notes').value
+        };
+        localStorage.setItem('pph_data_3', JSON.stringify(data));
+        switchPage(4);
+      }
+    }
+
+    // Generate and display final report
+    function generateReport() {
+      const p1 = JSON.parse(localStorage.getItem('pph_data_1')) || {};
+      const p2 = JSON.parse(localStorage.getItem('pph_data_2')) || {};
+      const p3 = JSON.parse(localStorage.getItem('pph_data_3')) || {};
+
+      const reportHTML = `
+        <h3>Patient Information</h3>
+        <p><strong>Name/ID:</strong> ${p1.name || 'N/A'}</p>
+        <p><strong>Age & Parity (GPA):</strong> ${p1.gpa || 'N/A'}</p>
+        <p><strong>Grand Multipara:</strong> ${p1.grand_multi || 'N/A'}</p>
+        <p><strong>Onset:</strong> ${p1.onset || 'N/A'}</p>
+        <p><strong>Symptoms:</strong> ${p1.symptoms || 'N/A'}</p>
+        
+        <hr>
+        <h3>Intrapartum & Placental History</h3>
+        <p><strong>Labor Duration:</strong> ${p2.labor_duration || 'N/A'}</p>
+        <p><strong>Mode of Delivery:</strong> ${p2.mode || 'N/A'}</p>
+        <p><strong>Placenta:</strong> ${p2.placenta || 'N/A'}</p>
+        <p><strong>Uterine Overdistension:</strong> ${p2.distension || 'N/A'}</p>
+        
+        <hr>
+        <h3>Clinical Markers & Vitals</h3>
+        <p><strong>Previous PPH:</strong> ${p3.prev_pph ? 'Yes' : 'No'}</p>
+        <p><strong>Coagulopathy/Blood Thinners:</strong> ${p3.thrombin_risk || 'None'}</p>
+        <p><strong>Pulse (BPM):</strong> ${p3.pulse || 'N/A'}</p>
+        <p><strong>BP (mmHg):</strong> ${p3.bp || 'N/A'}</p>
+        <p><strong>Uterine Tone:</strong> ${p3.tone || 'N/A'}</p>
+        <p><strong>Additional Notes:</strong> ${p3.notes || 'None'}</p>
+      `;
+      
+      document.getElementById('report-container').innerHTML = reportHTML;
+    }
+
+    // Reset form and start over
+    function resetForm() {
+      localStorage.clear();
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+        else el.value = '';
+      });
+      switchPage(1);
+    }
+
+    // Load saved data when page loads
+    window.addEventListener('DOMContentLoaded', function() {
+      const p1 = localStorage.getItem('pph_data_1');
+      if (p1) {
+        const data = JSON.parse(p1);
+        document.getElementById('name').value = data.name || '';
+        document.getElementById('gpa').value = data.gpa || '';
+        document.getElementById('grand_multi').value = data.grand_multi || '';
+        document.getElementById('onset').value = data.onset || '';
+        document.getElementById('symptoms').value = data.symptoms || '';
+      }
+    });
+  </script>
+</body>
+</html>

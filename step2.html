@@ -1,0 +1,17 @@
+<h2>Step 2: Intrapartum & Placental History</h2>
+<form id="pph-page-2">
+  <label>Labor Duration: <input type="text" id="labor_duration"></label><br>
+  <label>Mode of Delivery: 
+    <select id="mode">
+      <option value="SVD">SVD</option>
+      <option value="Forceps/Ventouse">Instrumental</option>
+      <option value="C-Section">C-Section</option>
+    </select>
+  </label><br>
+  <label>Placenta Complete? 
+    <input type="radio" name="placenta" value="Complete"> Yes
+    <input type="radio" name="placenta" value="Incomplete/Ragged"> No
+  </label><br>
+  <label>Uterine Overdistension (Multiple/Macrosomia): <input type="text" id="distension"></label><br>
+  <button type="button" onclick="saveAndNext(2)">Next: Medical History</button>
+</form>

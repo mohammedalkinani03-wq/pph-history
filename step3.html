@@ -1,0 +1,17 @@
+<h2>Step 3: History & Clinical Markers</h2>
+<form id="pph-page-3">
+  <label>Previous PPH? <input type="checkbox" id="prev_pph"></label><br>
+  <label>Coagulopathy/Blood Thinners: <input type="text" id="thrombin_risk"></label><br>
+  <hr>
+  <h3>Vitals</h3>
+  <label>Pulse (BPM): <input type="number" id="pulse"></label><br>
+  <label>BP (mmHg): <input type="text" id="bp"></label><br>
+  <label>Uterine Tone: 
+    <select id="tone">
+      <option value="Boggy">Boggy (Atony)</option>
+      <option value="Firm">Firm (Trauma/Thrombin)</option>
+    </select>
+  </label><br>
+  <label>Additional Notes: <textarea id="notes"></textarea></label><br>
+  <button type="button" onclick="saveAndNext(3)">Generate Final Report</button>
+</form>

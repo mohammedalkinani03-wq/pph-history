@@ -1,0 +1,25 @@
+<div class="card">
+  <h2>1. Bio-data & HOPI</h2>
+  <label>Full Name / Patient ID</label>
+  <input type="text" id="name" placeholder="Enter patient identity">
+
+  <label>Age & Parity (GPA)</label>
+  <input type="text" id="gpa" placeholder="e.g. 32yo, G3P2A0">
+
+  <label>Is the patient a Grand Multipara (Para ≥ 5)?</label>
+  <select id="grand_multi">
+    <option value="No">No</option>
+    <option value="Yes">Yes (High Risk for Atony)</option>
+  </select>
+
+  <label>Onset: When did bleeding start?</label>
+  <select id="onset">
+    <option value="Primary">Primary (Within 24hrs)</option>
+    <option value="Secondary">Secondary (24hrs - 12wks)</option>
+  </select>
+
+  <label>Symptoms (Dizziness, Faintness, Pain?)</label>
+  <textarea id="symptoms" rows="2"></textarea>
+
+  <button onclick="saveStep(1)">Continue to Intrapartum History</button>
+</div>

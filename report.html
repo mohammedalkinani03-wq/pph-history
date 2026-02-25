@@ -1,0 +1,41 @@
+// Logic for Page 4: Report Generation
+function generateReport() {
+  const p1 = JSON.parse(localStorage.getItem('pph_data_1'));
+  const p2 = JSON.parse(localStorage.getItem('pph_data_2'));
+  const p3 = JSON.parse(localStorage.getItem('pph_data_3'));
+
+  const reportHTML = `
+    <h2>PPH Comprehensive Clinical Report</h2>
+    <div style="border: 1px solid #000; padding: 15px;">
+      <p><strong>Patient:</strong> ${p1.name} (${p1.age} yrs) | <strong>GPA:</strong> ${p1.gpa}</p>
+      <p><strong>Presentation:</strong> ${p1.timing} PPH, Est. Loss: ${p1.volume}</p>
+      <hr>
+      <p><strong>D// Logic for Page 4: Report Generation
+function generateReport() {
+  const p1 = JSON.parse(localStorage.getItem('pph_data_1'));
+  const p2 = JSON.parse(localStorage.getItem('pph_data_2'));
+  const p3 = JSON.parse(localStorage.getItem('pph_data_3'));
+
+  const reportHTML = `
+    <h2>PPH Comprehensive Clinical Report</h2>
+    <div style="border: 1px solid #000; padding: 15px;">
+      <p><strong>Patient:</strong> ${p1.name} (${p1.age} yrs) | <strong>GPA:</strong> ${p1.gpa}</p>
+      <p><strong>Presentation:</strong> ${p1.timing} PPH, Est. Loss: ${p1.volume}</p>
+      <hr>
+      <p><strong>Delivery:</strong> ${p2.mode} | <strong>Placenta:</strong> ${p2.placenta}</p>
+      <p><strong>Clinical Markers:</strong> Pulse: ${p3.pulse} BPM, BP: ${p3.bp}, Tone: ${p3.tone}</p>
+      <p><strong>Risk Factors:</strong> ${p3.thrombin_risk || 'None'}</p>
+      <hr>
+      <p><strong>Additional Notes:</strong> ${p3.notes}</p>
+    </div>
+  `;
+  document.getElementById('report-container').innerHTML = reportHTML;
+}elivery:</strong> ${p2.mode} | <strong>Placenta:</strong> ${p2.placenta}</p>
+      <p><strong>Clinical Markers:</strong> Pulse: ${p3.pulse} BPM, BP: ${p3.bp}, Tone: ${p3.tone}</p>
+      <p><strong>Risk Factors:</strong> ${p3.thrombin_risk || 'None'}</p>
+      <hr>
+      <p><strong>Additional Notes:</strong> ${p3.notes}</p>
+    </div>
+  `;
+  document.getElementById('report-container').innerHTML = reportHTML;
+}
